@@ -29,7 +29,7 @@ async def on_message(message):
 
         if cmd == 'scan':
 
-            if message.author.id != "":
+            if message.author.id != :
                 answer = discord.Embed(title="Monster Bot",
                                        description=f"Please do not mess around with my bot, {message.author}",
                                        colour=0x1a7794)
@@ -78,9 +78,11 @@ async def on_message(message):
                     limit=limit + 1000):  # The added 1000 is so in case it skips messages for being
                 if msg.author != client.user:  # a command or a message it sent, it will still read the
                     if not is_command(msg):  # the total amount originally specified by the user.
-                        data = data.append({'content': msg.content,
-                                            'time': msg.created_at,
-                                            'author': msg.author.name}, ignore_index=True)
+                        # data = data.append({'content': msg.content,
+                        #                     'time': msg.created_at,
+                        #                     'author': msg.author.name}, ignore_index=True)
+                        row = pd.DataFrame([[msg.content, msg.created_at, msg.author.name]], columns=['content', 'time', 'author'])
+                        data = pd.concat([data, row], ignore_index=True)
                     if len(data) == limit:
                         break
 
@@ -98,4 +100,4 @@ async def on_message(message):
             os.remove(file_location)  # Deleting the file
 
 
-client.run('key')
+client.run('')
